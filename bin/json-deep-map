@@ -7,27 +7,15 @@ require "json"
 
 def deep_map(json, &block)
   if json.is_a?(Hash)
-    yield(json).to_h do |key, value|
-      deep_map([key, value], &block)
-    end
+    yield(json).to_h { |key, value| deep_map([key, value], &block) }
   elsif json.is_a?(Array)
-    yield(json).map do |element|
-      deep_map(element, &block)
-    end
+    yield(json).map { |element| deep_map(element, &block) }
   else
     yield(json)
   end
 end
 
-parsed =
-  Dorian::Arguments.parse(
-    version: {
-      alias: :v
-    },
-    help: {
-      alias: :h
-    }
-  )
+parsed = Dorian::Arguments.parse(version: { alias: :v }, help: { alias: :h })
 
 abort parsed.help if parsed.options.help
 
