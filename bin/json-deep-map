@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 require "dorian/arguments"
-require "dorian/to_struct"
 require "json"
 
 def deep_map(json, &block)
