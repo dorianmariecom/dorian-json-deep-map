@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dorian-json-deep-map (1.2.1)
+    dorian-json-deep-map (1.2.2)
       dorian-arguments
       dorian-to_struct
       json
