@@ -5,13 +5,13 @@ require "dorian/arguments"
 require "dorian/to_struct"
 require "json"
 
-def deep_map(json, &block)
+def deep_map(json, &)
   json = yield(json.to_deep_struct).from_deep_struct
 
   if json.is_a?(Hash)
-    json.to_h { |key, value| deep_map([key, value], &block) }
+    json.to_h { |key, value| deep_map([key, value], &) }
   elsif json.is_a?(Array)
-    json.map { |element| deep_map(element, &block) }
+    json.map { |element| deep_map(element, &) }
   else
     json
   end
